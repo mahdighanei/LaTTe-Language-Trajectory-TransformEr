@@ -17,3 +17,4 @@ __pycache__/
 .ipynb_checkpoints/*
 .amltconfig
 *.yaml
+/image_data

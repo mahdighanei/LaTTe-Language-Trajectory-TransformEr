@@ -7,15 +7,22 @@ dataset_name = "latte_100k_lf"
 traj_n = 40
 dims=4
 
-user_study_folder = "/home/arthur/local_data/user_study"
 
-base_folder = "/home/arthur/Desktop/projects/LaTTe-Language-Trajectory-TransformEr/"
-data_folder = "/home/arthur/Desktop/projects/LaTTe-Language-Trajectory-TransformEr/data/"
-# models_folder = "/home/arthur/data/models/"
-models_folder = "/home/arthur/Desktop/projects/LaTTe-Language-Trajectory-TransformEr/models/"
+# user_study_folder = "/home/arthur/local_data/user_study"
 
-# image_dataset_folder = "/home/arthur/data/image_dataset/"
-image_dataset_folder = "/home/arthur/image_dataset/"
+# base_folder = "/home/arthur/Desktop/projects/LaTTe-Language-Trajectory-TransformEr/"
+# data_folder = "/home/arthur/Desktop/projects/LaTTe-Language-Trajectory-TransformEr/data/"
+# models_folder = "/home/arthur/Desktop/projects/LaTTe-Language-Trajectory-TransformEr/models/"
+
+# image_dataset_folder = "/home/arthur/image_dataset/"
+
+
+# user_study_folder = "/home/arthur/local_data/user_study"
+base_folder = ""
+data_folder = "./data/"
+models_folder = "./models/"
+
+image_dataset_folder = "./image_data/image_dataset/"
 
 
 #azure machine
