@@ -21,9 +21,9 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--epochs', type=int, default=0)
 parser.add_argument('--bs', type=int, default=64)
-parser.add_argument('--dataset_dir', default='/home/tum/data/data/',
+parser.add_argument('--dataset_dir', default='./data/',
                     help='Dataset directory.')
-parser.add_argument('--models_path', default="/home/tum/data/models/")
+parser.add_argument('--models_path', default="./models/")
 parser.add_argument('--exp_name', default="experimet_"+datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
 
 parser.add_argument('--lr', type=float, default=0.0) #use default lr decay
@@ -75,8 +75,8 @@ mr = Motion_refiner(traj_n = traj_n)
 
 # ------- load data --------
 print("loading data...")
-X_, Y_ = mr.load_XY(x_name="X4D_10000_objs_2to6_norm",y_name="Y4D_10000_objs_2to6_norm")
-data_ = mr.load_data(data_name="data4D_100000_objs_2to6_norm")
+X_, Y_ = mr.load_XY(x_name="Xlatte_100k_lf",y_name="Ylatte_100k_lf")
+data_ = mr.load_data(data_name="datalatte_100k_lf")
 feature_indices, obj_sim_indices, obj_poses_indices, traj_indices = mr.get_indices()
 
 

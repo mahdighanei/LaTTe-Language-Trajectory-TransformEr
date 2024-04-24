@@ -17,14 +17,13 @@ from motion_refiner_4D import Motion_refiner
 # from mlflow.tracking import MlflowClient
 # import mlflow
 
-
 parser = argparse.ArgumentParser()
 
 parser.add_argument('--epochs', type=int, default=0)
 parser.add_argument('--bs', type=int, default=16)
-parser.add_argument('--dataset_dir', default='/home/tum/data/data/',
+parser.add_argument('--dataset_dir', default='./data/',
                     help='Dataset directory.')
-parser.add_argument('--models_path', default="/home/tum/data/models/")
+parser.add_argument('--models_path', default="./models/")
 parser.add_argument('--exp_name', default="experimet_"+datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
 
 parser.add_argument('--lr', type=float, default=0.0) #use default lr decay
@@ -69,7 +68,7 @@ embedding_indices = np.concatenate([feature_indices,obj_sim_indices])
 
 
 # dataset_name = "4D_10000_objs_2to6_norm_"
-dataset_name = "4D_80000"
+dataset_name = "latte_100k_lf"
 X,Y, data = mr.load_dataset(dataset_name, filter_data = True, base_path=args.dataset_dir)
 X_train, X_test, X_valid, y_train, y_test, y_valid, indices_train, indices_test, indices_val = mr.split_dataset(X, Y, test_size=0.2, val_size=0.1)
 
@@ -410,9 +409,13 @@ print("\nlr_schedule: ", lr_schedule)
 
 
 
+# X_train: (67702, 953)
+# X_t: (((67702, 46, 4), (67702, 39, 4), (67702, 774)) ,  (67702, 39, 4))
+# Y_t: (67702, 40, 4)
 
 Y_t = list_to_wp_seq(y_train,d=4)
-X_t = ((prepare_x(X_train),Y_tt[:,:-1], X_train[:,embedding_indices]),Y_t[:,1:])
+X_t = ((prepare_x(X_train),Y_t[:,:-1], X_train[:,embedding_indices]),Y_t[:,1:])
+
 
 Y_v = list_to_wp_seq(y_train,d=4)
 X_v = ((prepare_x(X_valid),Y_t[:,:-1], X_valid[:,embedding_indices]),Y_v[:,1:])
