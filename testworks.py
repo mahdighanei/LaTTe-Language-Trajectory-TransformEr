@@ -81,12 +81,14 @@ def evaluate_model(model, epoch):
     # result_eval_aug = model.evaluate(generator(test_dataset,stop=True))[0]
     x_test_new, y_test_new, emb_test_new= increase_dataset(X_test ,y_test,embedding_indices,10)
     result_eval_aug = model.evaluate((x_test_new, y_test_new[:,:-1,:], emb_test_new), y_test_new[:,1:,:])[0]
+    print('*****\nwith data augmentation:\n', result_eval_aug)
 
 
     print("without data augmentation:")
-    result_eval = model.evaluate(generator(test_dataset,stop=True, augment=False))[0]
+    # result_eval = model.evaluate(generator(test_dataset,stop=True, augment=False))[0]
     x_test_new, y_test_new, emb_test_new= increase_dataset(X_test ,y_test,embedding_indices,0)
     result_eval = model.evaluate((x_test_new, y_test_new[:,:-1,:], emb_test_new), y_test_new[:,1:,:])[0]
+    print('*****\nwithout data augmentation::\n', result_eval)
 
     print("\n ----------------------------------------")
     print("withdata generation:")
@@ -101,7 +103,7 @@ def evaluate_model(model, epoch):
     pred = generate(model ,x_t, traj_n = len(y_t[0,:,0]) + 1).numpy()
     np.save('genAug.npy', pred)
     result_gen_aug = np.average((y_t - pred[:,1:,:])**2)
-    print("Test loss w generation and augmentation: ",result_gen_aug)
+    print("****Test loss w generation and augmentation: ",result_gen_aug)
 
 
     g = generator(test_dataset,stop=True,augment=False)
@@ -109,7 +111,7 @@ def evaluate_model(model, epoch):
     pred = generate(model ,x_t, traj_n = len(y_t[0,:,0]) + 1).numpy()
     np.save('genNoAug.npy', pred)
     result_gen = np.average((y_t - pred[:,1:,:])**2)
-    print("Test loss w generation: ",result_gen)
+    print("****Test loss w generation: ",result_gen)
 
 
     file_writer = tf.summary.create_file_writer(logdir + "/metrics")
