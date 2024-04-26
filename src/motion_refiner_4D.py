@@ -111,11 +111,11 @@ class Motion_refiner():
         """load a pre-trained BERT model (DistilBERT)"""
 
         # For DistilBERT:
-        # model_class, tokenizer_class, pretrained_weights = (
-        #     ppb.DistilBertModel, ppb.DistilBertTokenizer, 'distilbert-base-uncased')
+        model_class, tokenizer_class, pretrained_weights = (
+            ppb.DistilBertModel, ppb.DistilBertTokenizer, 'distilbert-base-uncased')
         
         # For BGE model
-        model_class, tokenizer_class, pretrained_weights = (ppb.AutoModel, ppb.AutoTokenizer, 'BAAI/bge-base-en-v1.5')
+        # model_class, tokenizer_class, pretrained_weights = (ppb.AutoModel, ppb.AutoTokenizer, 'BAAI/bge-base-en-v1.5')
 
         # Load pretrained model/tokenizer
         tokenizer = tokenizer_class.from_pretrained(pretrained_weights)
@@ -147,10 +147,10 @@ class Motion_refiner():
     def load_CLIP(self, verbose=0):
 
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        # model, preprocess = clip.load('ViT-B/32', self.device) #commented out for siglip
+        model, preprocess = clip.load('ViT-B/32', self.device) #commented out for siglip
 
-        model = ppb.AutoModel.from_pretrained("google/siglip-base-patch16-512")
-        preprocess = ppb.AutoProcessor.from_pretrained("google/siglip-base-patch16-512")
+        # model = ppb.AutoModel.from_pretrained("google/siglip-base-patch16-512")
+        # preprocess = ppb.AutoProcessor.from_pretrained("google/siglip-base-patch16-512")
 
         # model.cuda().eval()
         # input_resolution = model.visual.input_resolution  #commented out for siglip

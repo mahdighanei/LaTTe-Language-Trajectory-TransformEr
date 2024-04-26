@@ -48,7 +48,8 @@ parser.add_argument('--norm_layer', type=int, default=1)
 
 
 args = parser.parse_args()
-
+args.epochs = 500
+args.bs = 32
 
 
 concat_emb = False if args.concat_emb == 0 else True 
@@ -227,6 +228,7 @@ if args.base_model != "None":
     
     if args.base_model[-3:] == ".h5": #base_model is a path
 
+        
         model = load_model(args.base_model)
         base_model_name = args.base_model.split("/")[-1][:-3]
     else:
@@ -364,7 +366,7 @@ def evaluate_model(model, epoch):
 
     g = generator(test_dataset,stop=True,augment=False)
     x_t, y_t = next(g)
-    pred = generate(model ,x_t).numpy()
+    pred = generate(model, x_t).numpy()
     result_gen = np.average((y_t - pred[:,1:,:])**2)
     print("Test loss w generation: ",result_gen)
 
